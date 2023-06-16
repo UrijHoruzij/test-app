@@ -1,20 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, ChangeEvent } from 'react';
 import { Button, Input, Form, Select, Card } from 'antd';
 import styles from './App.module.css';
 import { UserContext } from './components';
+import { IUser, IUserContext } from './components/@types';
 import bg from './bg.jpg';
 
 const App = () => {
-	const [login, setLogin] = useState('');
-	const [update, setUpdate] = useState(false);
-	const [values, setValues] = useState({
+	const [login, setLogin] = useState<string>('');
+	const [update, setUpdate] = useState<boolean>(false);
+	const [values, setValues] = useState<IUser>({
 		id: 0,
 		login: '',
 		password: '',
 		interests: '',
 	});
-	const [users, updateUser, findUser] = useContext(UserContext);
-
+	const { updateUser, findUser } = useContext(UserContext) as IUserContext;
 	const handleUpdate = () => {
 		if (update) {
 			updateUser(values);
@@ -28,7 +28,7 @@ const App = () => {
 		}
 	};
 
-	const handleChangeSearch = (e) => {
+	const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
 		setLogin(e.target.value);
 	};
 	const handleSearch = () => {
@@ -40,18 +40,25 @@ const App = () => {
 		setLogin('');
 	};
 
-	const handleChangeLoginAndPassword = (e) => {
+	const handleChangeLogin = (e: ChangeEvent<HTMLInputElement>) => {
 		if (update) {
-			let inputName = e.target.name;
 			let inputValue = e.target.value;
-			let valuesCopy = Object.assign({}, values);
-			valuesCopy[inputName] = inputValue;
+			let valuesCopy: IUser = Object.assign({}, values);
+			valuesCopy['login'] = inputValue;
 			setValues(valuesCopy);
 		}
 	};
-	const handleChangeInterests = (interests) => {
+	const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
 		if (update) {
-			let valuesCopy = Object.assign({}, values);
+			let inputValue = e.target.value;
+			let valuesCopy: IUser = Object.assign({}, values);
+			valuesCopy['password'] = inputValue;
+			setValues(valuesCopy);
+		}
+	};
+	const handleChangeInterests = (interests: string) => {
+		if (update) {
+			let valuesCopy: IUser = Object.assign({}, values);
 			valuesCopy['interests'] = interests;
 			setValues(valuesCopy);
 		}
@@ -67,7 +74,7 @@ const App = () => {
 							name="login"
 							placeholder="Логин"
 							value={values.login}
-							onChange={handleChangeLoginAndPassword}
+							onChange={handleChangeLogin}
 						/>
 						<Input
 							disabled={!update}
@@ -76,14 +83,13 @@ const App = () => {
 							type="password"
 							placeholder="Пароль"
 							value={values.password}
-							onChange={handleChangeLoginAndPassword}
+							onChange={handleChangePassword}
 						/>
 						<Select
 							disabled={!update}
 							className={styles.space}
 							value={values.interests}
 							placeholder="Интересы"
-							name="interests"
 							onChange={handleChangeInterests}
 							options={[
 								{ value: 'programming', label: 'Программирование' },

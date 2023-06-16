@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { UserContext } from './';
+import React, { useState, FC } from 'react';
+import { UserContext } from '.';
+import { IUser } from './@types';
 
-const UserProvider = (props) => {
-	const [users, setUsers] = useState([
+interface UserProviderProps {
+	children?: React.ReactNode;
+}
+const UserProvider: FC<UserProviderProps> = (props) => {
+	const { children } = props;
+	const [users, setUsers] = useState<IUser[]>([
 		{
 			id: 1,
 			login: 'admin',
@@ -14,13 +19,13 @@ const UserProvider = (props) => {
 		{ id: 4, login: 'nastya', password: 'nasty@', interests: 'fitness' },
 		{ id: 5, login: 'Dmitriy', password: 'dima', interests: 'reading' },
 	]);
-	const findUser = (login) => {
+	const findUser = (login: string): IUser | undefined => {
 		return users.find((user) => user.login === login);
 	};
-	const updateUser = (values) => {
+	const updateUser = (values: IUser): void => {
 		const newUsers = users.map((user) => (user.id === values.id ? values : user));
 		setUsers(newUsers);
 	};
-	return <UserContext.Provider value={[users, updateUser, findUser]}>{props.children}</UserContext.Provider>;
+	return <UserContext.Provider value={{ users, updateUser, findUser }}>{children}</UserContext.Provider>;
 };
 export default UserProvider;
