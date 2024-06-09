@@ -1,0 +1,70 @@
+.Post {
+	position: relative;
+	border-radius: 5px;
+	box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+	padding: 15px;
+	background: #ffffff;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	&__Favorite {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		width: 32px;
+		height: 32px;
+		background: #ffffff;
+		border: none;
+		border-radius: 50%;
+		filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.15));
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		&_Icon {
+			width: 24px;
+			height: 24px;
+		}
+	}
+	&__Image {
+		width: 240px;
+		height: 240px;
+		border-radius: 5px;
+		object-fit: cover;
+	}
+	&__Content {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	&__Title {
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 24px;
+		color: #1d1d1d;
+		margin: 0;
+	}
+	&__Text {
+		font-size: 12px;
+		font-weight: 400;
+		line-height: 18px;
+		color: #1d1d1d;
+		margin: 0;
+	}
+	&__Link {
+		background: none;
+		border: 1px solid #cce6ff;
+		border-radius: 5px;
+		height: 50px;
+		padding: 13px;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 24px;
+		color: #0084ff;
+		cursor: pointer;
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
