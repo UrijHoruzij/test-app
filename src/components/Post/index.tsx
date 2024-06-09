@@ -46,7 +46,7 @@ const Post: FC<PostProps> = (props) => {
 			</button>
 			<img className={styles.Post__Image} src={thumbnailUrl} alt={title} />
 			<div className={styles.Post__Content}>
-				<h6 className={styles.Post__Title}>Title: {title}</h6>
+				<h6 className={styles.Post__Title}>{title}</h6>
 				<p className={styles.Post__Text}>ID: {id}</p>
 				<p className={styles.Post__Text}>Album ID: {albumId}</p>
 				<a className={styles.Post__Link} href={url}>
