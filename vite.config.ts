@@ -6,5 +6,6 @@ export default defineConfig({
 	resolve: {
 		alias: [{ find: '@', replacement: '/src' }],
 	},
+	base: 'https://urijhoruzij.github.io/',
 	plugins: [react()],
 });
